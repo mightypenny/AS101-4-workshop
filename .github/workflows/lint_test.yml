@@ -17,14 +17,26 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: build docker containers
+      env:
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       run: |
         docker-compose build
     - name: Lint web using flake8 in web docker container
+      env:
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       run: |
         docker-compose run web bash -c \
           "flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics \
            && flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics"
     - name: Basic smoke test
+      env:
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       run: |
         docker-compose up --build --detach
         sleep 10

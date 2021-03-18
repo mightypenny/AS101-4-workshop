@@ -1,3 +1,6 @@
 fileignoreconfig:
 - filename: docker-compose.yml
   checksum: 041cf7d5ba27c545cf1b76277d0c293431fcbe4d389b0e4025fb6182a6cbe523
+- filename: .github/workflows/lint_test.yml
+  checksum: 6a10d65bd8eb6cfbe500116d39fafa8c7b0203bd71a5a5e4981e6b9a2ddf9b6b
+
